@@ -1,0 +1,13 @@
+@font-face { font-family: Nakago; src: url('/ttf/wadalab-nakago-IsomeRight.ttf'); }
+@font-face { font-family: Apple; src: url('/ttf/Apple ][.ttf'); }
+*{ padding: 0; margin: 0; }
+html{ height: 100%; width: 100%; }
+body{ background-image: url(/img/background_grid.png); }
+.peg{ height: 44px; width: 64px; background: url(/img/peg.png); position: absolute; }
+.pipe{ height: 32px; width: 64px; background: url(/img/pipe.png); position: absolute; }
+.disc1{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
+.disc2{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
+.disc3{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
+.disc4{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
+.class_name{ font-family: Nakago; position: absolute; font-size: 20px; -webkit-transform: rotate(-26.7deg); }
+.module { font-family: Apple; font-size: 8px; position: absolute; }
