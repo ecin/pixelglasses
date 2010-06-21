@@ -51,7 +51,7 @@ __END__
                                 var json = response.responseJSON;
                                 new Graph2(json);
                                 new Draggable($('container'), {
-                                  snap: [64, 32],
+                                  snap: [32, 16],
                                   scroll: false
                                 });
                               }});
