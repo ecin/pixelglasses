@@ -5,7 +5,7 @@
 @font-face { font-family: M04; src: url('/ttf/m04.ttf'); }
 *{ padding: 0; margin: 0; }
 html{ height: 100%; width: 100%; }
-body{ height: 100%; width: 100%; overflow: hidden; background: #ccc; background-image: url(/img/background_grid.png); }
+body{ height: 100%; width: 100%; overflow: hidden; background-image: url(/img/background_grid.png); }
 #container{  overflow: none; height: 100%; width: 100%;}
 .peg{ height: 44px; width: 64px; background: url(/img/peg.png); position: absolute; }
 .pipe{ height: 32px; width: 64px; background: url(/img/pipe.png); position: absolute; }
@@ -21,10 +21,18 @@ body{ height: 100%; width: 100%; overflow: hidden; background: #ccc; background-
   font-family: Fipps; 
   position: absolute; 
   font-size: 8px; 
-  background: #eee; 
-  opacity: 0.85; 
+  background: #fff; 
+  opacity: 0.8; 
   padding: 0 3px 0 3px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
+  letter-spacing: 1px;
   }
 .module { font-family: Apple; font-size: 8px; position: absolute; }
+#search_box{
+  position: relative;
+  top: 20px;
+  float: right;
+  margin-right: 20px;
+  z-index: 1000;
+}

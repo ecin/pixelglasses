@@ -61,6 +61,9 @@ __END__
     </script>
   </head>
   <body>
+    <form>
+      <input id="search_box" type="search" placeholder="Ruby class name">
+    </form>
     <div id='container'></div>
   </body>
 </html>
