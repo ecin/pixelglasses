@@ -111,6 +111,7 @@ Peg.prototype.moveTo = function(x, y){
   var left = x*32 + y*32; 
   var top = x*-16 + y*16 - 12; // Peg images are higher than a cell's 32px (by 12px).
   this.toElement().moveTo(left, top);
+  this.toElement().style.zIndex = -x;
   
   // Make sure the discs and banner are moved alongside the peg.
   //this.repositionDiscs();
@@ -121,6 +122,7 @@ Peg.prototype.repositionBanner = function(){
   if(defined(this.banner)){
     var position = this.toElement().position();
     this.banner.moveTo(position.x, position.y - 16);
+    this.banner.style.zIndex = -this.position.x;
   }
 }
 
