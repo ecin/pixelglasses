@@ -3,15 +3,15 @@
 $:.unshift File.expand_path(File.dirname(__FILE__) + '/../lib')
 require 'tree'
 
-tree = Tree.new(BasicObject)
+tree = Tree.new({:class => BasicObject, :modules => BasicObject.included_modules.reverse})
 
 ObjectSpace.each_object(Class) do |obj|
   current_node = tree.root
   (obj.ancestors - obj.included_modules).reverse[1..-1].each do |klass|
-    if res = current_node.find(klass)
+    if res = current_node.find({:class => klass, :modules => klass.included_modules.reverse})
       current_node = res
     else
-      node = Tree::Node.new(klass)
+      node = Tree::Node.new({:class => klass, :modules => klass.included_modules.reverse})
       current_node << node
       current_node = node
     end

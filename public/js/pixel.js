@@ -27,7 +27,8 @@ var Node = function(opts){
 }
 
 Node.prototype.draw = function(level){
-  var peg = new Peg(this.value);
+  level = level || 0;
+  var peg = new Peg(this.value['class'], this.value['modules']);
   peg.moveTo(Graph2.NEXT, level);
   var children = this.children
   children.each( function(node_options, i){
@@ -43,9 +44,8 @@ var Graph2 = function(root){
   var position = {'x': 0, 'y': 0}
   
   this.pegs = new Array;
-  var self = this;
-  var root = new Node(root);
-  root.draw(0);
+  this.root = new Node(root);
+  this.root.draw();
 }
 
 Graph2.NEXT = 0;
@@ -114,15 +114,15 @@ Peg.prototype.moveTo = function(x, y){
   this.toElement().style.zIndex = -x;
   
   // Make sure the discs and banner are moved alongside the peg.
-  //this.repositionDiscs();
+  this.repositionDiscs();
   this.repositionBanner();
 }
 
 Peg.prototype.repositionBanner = function(){
   if(defined(this.banner)){
     var position = this.toElement().position();
+    this.banner.style.zIndex = -this.position.x + 1;
     this.banner.moveTo(position.x, position.y - 16);
-    this.banner.style.zIndex = -this.position.x;
   }
 }
 
@@ -144,7 +144,10 @@ Peg.prototype.repositionDiscs = function(){
   var top = x*-16 + y*16 - 12; // Peg images are higher than a cell's 32px (by 12px).
   
   // * 7: each disc is 7px high.
-  this.discs.map( function(disc, i){ disc.moveTo(left, top + 7 - (7 * (i + 1))) } );
+  this.discs.map( function(disc, i){ 
+    disc.style.zIndex = -x;
+    disc.moveTo(left, top + 7 - (7 * (i + 1))) 
+  } );
 }
 
 // Add a disc on top of the peg. module_name determines its color.
@@ -154,11 +157,11 @@ Peg.prototype.addDisc = function(disc_name){
   var x = this.position.x;
   var y = this.position.y;
   var left = x*32 + y*32; 
-  var top = x*-16 + y*16 - 7(this.discs.length + 1); // The -7n represents discs already on the stack.
+  var top = x*-16 + y*16 - 7*(this.discs.length + 1); // The -7n represents discs already on the stack.
   var disc = new Element('div', {'class': 'disc' + disc_number, 'disc_name': disc_name});
 
   disc.insertTo($('container'));
-  disc.moveTo(column, row);
+  disc.moveTo(left, top);
   this.discs.push(disc);
   return true;
 }
