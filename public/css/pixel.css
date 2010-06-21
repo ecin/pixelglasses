@@ -5,7 +5,7 @@
 @font-face { font-family: M04; src: url('/ttf/m04.ttf'); }
 *{ padding: 0; margin: 0; }
 html{ height: 100%; width: 100%; }
-body{ height: 100%; width: 100%; overflow: hidden; background-image: url(/img/background_grid.png); }
+body{ height: 100%; width: 100%; overflow: hidden; background: #ccc; background-image: url(/img/background_grid.png); }
 #container{  overflow: none; height: 100%; width: 100%;}
 .peg{ height: 44px; width: 64px; background: url(/img/peg.png); position: absolute; }
 .pipe{ height: 32px; width: 64px; background: url(/img/pipe.png); position: absolute; }
@@ -13,5 +13,18 @@ body{ height: 100%; width: 100%; overflow: hidden; background-image: url(/img/ba
 .disc2{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
 .disc3{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
 .disc4{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
-.class_name{ font-family: Fipps; position: absolute; font-size: 8px; }
+.disc5{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
+.disc6{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
+.disc7{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
+.disc8{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
+.class_name{ 
+  font-family: Fipps; 
+  position: absolute; 
+  font-size: 8px; 
+  background: #eee; 
+  opacity: 0.85; 
+  padding: 0 3px 0 3px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  }
 .module { font-family: Apple; font-size: 8px; position: absolute; }
