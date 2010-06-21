@@ -1,7 +1,18 @@
+$:.unshift File.expand_path(File.dirname(__FILE__))
+
 require 'sinatra'
-require 'json'
 
 set :public, File.expand_path( File.dirname(__FILE__) + '/../public' )
+
+get '/tree', :provides => :json do 
+  json = `bin/tree`
+  throw :halt, [404, nil] if json.empty?
+  json
+end
+
+get '/tree' do
+  erb :grid
+end
 
 # When asked for JSON, we return the class tree in JSON format.
 # Interesting problem: JSON (and perhaps Sinatra)
@@ -38,8 +49,11 @@ __END__
                               { 'method': 'get',
                                 'onSuccess': function(response){
                                 var json = response.responseJSON;
-                                new Graph(json);
-                                new Draggable($('container'));
+                                new Graph2(json);
+                                new Draggable($('container'), {
+                                  snap: [64, 32],
+                                  scroll: false
+                                });
                               }});
         request.setHeader('Accept', 'application/json');
         request.send();

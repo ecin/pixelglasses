@@ -1,5 +1,8 @@
 @font-face { font-family: Nakago; src: url('/ttf/wadalab-nakago-IsomeRight.ttf'); }
 @font-face { font-family: Apple; src: url('/ttf/Apple ][.ttf'); }
+@font-face { font-family: Mizu; src: url('/ttf/mizufalp.ttf'); }
+@font-face { font-family: Fipps; src: url('/ttf/fipps.ttf'); }
+@font-face { font-family: M04; src: url('/ttf/m04.ttf'); }
 *{ padding: 0; margin: 0; }
 html{ height: 100%; width: 100%; }
 body{ height: 100%; width: 100%; overflow: hidden; background-image: url(/img/background_grid.png); }
@@ -10,5 +13,5 @@ body{ height: 100%; width: 100%; overflow: hidden; background-image: url(/img/ba
 .disc2{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
 .disc3{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
 .disc4{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
-.class_name{ font-family: Nakago; position: absolute; font-size: 20px; -webkit-transform: rotate(-26.7deg); }
+.class_name{ font-family: Fipps; position: absolute; font-size: 8px; }
 .module { font-family: Apple; font-size: 8px; position: absolute; }

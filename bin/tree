@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.expand_path(File.dirname(__FILE__) + '/../lib')
+require 'tree'
+
+tree = Tree.new(BasicObject)
+
+ObjectSpace.each_object(Class) do |obj|
+  current_node = tree.root
+  (obj.ancestors - obj.included_modules).reverse[1..-1].each do |klass|
+    if res = current_node.find(klass)
+      current_node = res
+    else
+      node = Tree::Node.new(klass)
+      current_node << node
+      current_node = node
+    end
+  end
+end
+
+# NOW require json, after we got our vanilla modules.
+require 'json'
+
+puts tree.to_json
+
+# No errors, let's get out of here!
+exit 0
