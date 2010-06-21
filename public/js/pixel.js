@@ -165,3 +165,23 @@ Peg.prototype.addDisc = function(disc_name){
   this.discs.push(disc);
   return true;
 }
+
+// Legend for modules. We pass it in Peg.modules, and it does its thang
+Legend = function(modules){
+  var legend = new Element('div', {'id': 'legend'});
+  var title = new Element('div', {'class': 'title', 'html': 'Modules Legend'});
+
+  title.insertTo(legend);
+  
+  Object.keys(modules).each( function(key){
+    console.log(key);
+    var item = new Element('div', {'class': 'key'});
+    var label = new Element('div', {'class': 'label', 'html': key});
+    var disc = new Element('div', {'class': 'legend_disc' + modules[key]});
+    
+    item.insert([label, disc]);
+    item.insertTo(legend);
+  });
+  
+  legend.insertTo($$('body')[0]);
+}

@@ -6,7 +6,7 @@
 *{ padding: 0; margin: 0; }
 html{ height: 100%; width: 100%; }
 body{ height: 100%; width: 100%; overflow: hidden; background-image: url(/img/background_grid.png); }
-#container{  overflow: none; height: 100%; width: 100%;}
+#container{  overflow: none; }
 .peg{ height: 44px; width: 64px; background: url(/img/peg.png); position: absolute; }
 .pipe{ height: 32px; width: 64px; background: url(/img/pipe.png); position: absolute; }
 .disc1{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
@@ -36,3 +36,44 @@ body{ height: 100%; width: 100%; overflow: hidden; background-image: url(/img/ba
   margin-right: 20px;
   z-index: 1000;
 }
+#legend{
+  font-family: Fipps;
+  font-size: 8px;
+  position: fixed;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  opacity: 0.90;
+  margin-top: 20px;
+  left: 20px;
+  bottom: 20px;
+  background: white;
+}
+#legend .key{
+  min-width: 64px; 
+  -moz-border-radius: 5px;
+  /*-webkit-border-radius: 5px 5px 0px 0px;*/
+  text-align: left;
+  letter-spacing: 1px;
+  float: left;
+  margin: 0 2px 0 2px;
+}
+#legend .title{
+  text-align: center;
+  background: #ccc;
+  -webkit-border-radius: 5px 5px 0px 0px;
+}
+#legend .label{
+  text-align: center;
+}
+#legend .center{
+  margin: 0 auto;
+  width: 64px;
+}
+.legend_disc1{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
+.legend_disc2{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
+.legend_disc3{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
+.legend_disc4{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
+.legend_disc5{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
+.legend_disc6{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
+.legend_disc7{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
+.legend_disc8{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }

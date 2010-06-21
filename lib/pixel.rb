@@ -54,6 +54,8 @@ __END__
                                   snap: [32, 16],
                                   scroll: false
                                 });
+                                console.log(Peg.modules);
+                                new Legend(Peg.modules);
                               }});
         request.setHeader('Accept', 'application/json');
         request.send();
