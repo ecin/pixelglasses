@@ -65,11 +65,27 @@ Node.prototype.nodize = function(){
   this.children = children;
 }
 
+Node.prototype.find = function(lambda){
+  if(lambda(this)){
+    return this;
+  }
+
+  for( var i = 0, length = this.children.length; i < length; i++){
+    if( node = this.children[i].find(lambda) ){
+      return node;
+    }
+  }
+}
+
 var Graph2 = function(root){
   var position = {'x': 0, 'y': 0}
   
   this.root = new Node(root);
   this.root.draw();
+}
+
+Graph2.prototype.find = function(lambda){
+  return this.root.find(lambda);
 }
 
 Graph2.NEXT = 0;
@@ -203,7 +219,7 @@ Legend = function(modules){
   </div>
 */
 
-// class should have a @ancestors property and a @value property
+// node should have a @ancestors property and a @value property
 Inspector = function(node){
   var branch = new Element('div', {'class': 'branch'});
   var title = new Element('div', {'class': 'title', 'html': node.value })
@@ -220,7 +236,11 @@ Inspector = function(node){
   $('container').insert(branch);
 }
 
-Array.prototype.find = function(value){
-  var index = this.indexOf(value);
-  return index != -1 ? this[index] : null;
+Array.prototype.find = function(lambda){
+  for( var i = 0, length = this.length; i < length ; i++ ){
+    if(lambda(this[i])){
+      return this[i];
+    }
+  }
+  return null;
 }
