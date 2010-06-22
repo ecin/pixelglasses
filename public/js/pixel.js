@@ -5,7 +5,6 @@ var Graph = function(klasses){
   var self = this;
   klasses.each( function(el, i){
     var peg = new Peg(el.klass, el.modules);
-    console.log(el.modules);
     peg.moveTo(position.x += 2, position.y += 1);
     
     if(defined(klasses[i+1])){

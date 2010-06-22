@@ -52,7 +52,12 @@ __END__
                                 TREE = new Graph2(json);
                                 new Draggable($('container'), {
                                   snap: [32, 16],
-                                  scroll: false
+                                  scroll: false,
+                                  onDrag: function(draggable, event){
+                                    var x = event.clientX;
+                                    var y = event.clientY;
+                                    $$('body')[0].style.backgroundPosition = x + 'px ' + y + 'px';
+                                  } 
                                 });
                                 new Legend(Peg.modules);
                                 "#container div.node".on('dblclick', function(el){
