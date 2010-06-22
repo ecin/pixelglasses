@@ -7,7 +7,7 @@
 html{ height: 100%; width: 100%; }
 body{ height: 100%; width: 100%; overflow: hidden; background-image: url(/img/background_grid.png); }
 #container{  overflow: none; }
-.peg{ height: 44px; width: 64px; background: url(/img/peg.png); position: absolute; }
+.node{ min-height: 44px; width: 64px; background: url(/img/peg.png); position: absolute; }
 .pipe{ height: 32px; width: 64px; background: url(/img/pipe.png); position: absolute; }
 .disc1{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
 .disc2{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
@@ -77,3 +77,32 @@ body{ height: 100%; width: 100%; overflow: hidden; background-image: url(/img/ba
 .legend_disc6{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
 .legend_disc7{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
 .legend_disc8{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
+#inspector{
+  min-width: 125px;
+  position: fixed;
+  background: #333;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  opacity: 0.90;
+  margin-top: 20px;
+  margin-left: 20px;
+  font-family: Fipps;
+  font-size: 8px;
+}
+#inspector .title{
+  background: #fff;
+  -moz-border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 5px 5px 0 0;
+  text-align: center;
+  letter-spacing: 1px;
+  padding: 0 10px 0 10px;
+}
+#inspector .name{
+  z-index: 1; 
+  position: relative; 
+  margin: 0 auto; 
+  -webkit-border-radius: 0px;
+  background: #fff;
+  padding-left: 5px;
+}
+#inspector .node{ position: relative; margin: 0 auto; margin-top: 5px; margin-bottom: 5px; z-index: 0; }

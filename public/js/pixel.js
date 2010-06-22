@@ -77,6 +77,10 @@ Node.prototype.find = function(lambda){
   }
 }
 
+Node.prototype.toElement = function(){
+  return $$("div.node[value='" + this.value['class'] + "']")[0];
+}
+
 var Graph2 = function(root){
   var position = {'x': 0, 'y': 0}
   
@@ -207,33 +211,33 @@ Legend = function(modules){
   
   legend.insertTo($$('body')[0]);
 }
-/*
- <div id='branch'>
-    <div class='title'>Struct</div>
-    <div class="class_name" style="z-index: 1; position: relative; margin: 0 auto; -webkit-border-radius: 0px;">BasicObject</div>
-    <div class="peg" peg_name="BasicObject" style="position: relative; margin: 0 auto; margin-top: 5px; margin-bottom: 5px; z-index: 0; "></div>
-    <div class="class_name" style="z-index: 1; position: relative; margin: 0 auto; -webkit-border-radius: 0px;">Object</div>
-    <div class="peg" peg_name="BasicObject" style="position: relative; margin: 0 auto; margin-top: 5px; margin-bottom: 5px; z-index: 0; ">
-      <div class="disc1" disc_name="Kernel" style="z-index: 0; margin: 0 auto; top: 0px; "></div>
-    </div>
-  </div>
-*/
 
 // node should have a @ancestors property and a @value property
-Inspector = function(node){
-  var branch = new Element('div', {'class': 'branch'});
-  var title = new Element('div', {'class': 'title', 'html': node.value })
+Graph2.prototype.display = function(klass){
+  var lambda = function(node){
+    return node.value['class'] == klass;
+  }
   
-  branch.insert(title);
+  var node = this.find(lambda);
   
-  node.ancestors.each( function(ancestor){
-    var class_name = new Element('div', {'class': 'class_name', 'html': ancestor.value });
-    var peg = new Element('div', {'class': 'node', 'value': ancestor.value });
+  // Jump out if we can't find the given class
+  if( !(node) ){
+    return null;
+  }
+  
+  var inspector = $('inspector');
+  inspector.clean(); // Remove all previous elements
+  
+  var title = new Element('div', {'class': 'title', 'html': node.value['class'] });
+  inspector.insert(title);
+  
+  node.ancestors().each( function(ancestor){
+    var name = new Element('div', {'class': 'name', 'html': ancestor.value['class'] });
+    var peg = ancestor.toElement().cloneNode(true);
+    peg.setStyle({'left': 0, 'top': 0});
 
-    branch.insert[class_name, peg];
+    inspector.insert([name, peg]);
   })
-  
-  $('container').insert(branch);
 }
 
 Array.prototype.find = function(lambda){

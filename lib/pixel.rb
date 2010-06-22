@@ -49,13 +49,21 @@ __END__
                               { 'method': 'get',
                                 'onSuccess': function(response){
                                 var json = response.responseJSON;
-                                new Graph2(json);
+                                TREE = new Graph2(json);
                                 new Draggable($('container'), {
                                   snap: [32, 16],
                                   scroll: false
                                 });
-                                console.log(Peg.modules);
                                 new Legend(Peg.modules);
+                                "#container div.node".on('dblclick', function(el){
+                                  TREE.display(el.target.value);
+                                })
+                                "#container div.node > div".on('dblclick', function(el){
+                                  TREE.display(el.target.parentNode.value);                                  
+                                });
+                                "body".on('dblclick', function(el){
+                                  $('inspector').clean();
+                                })
                               }});
         request.setHeader('Accept', 'application/json');
         request.send();
@@ -66,6 +74,7 @@ __END__
     <form>
       <input id="search_box" type="search" placeholder="Ruby class name">
     </form>
+    <div id='inspector'></div>
     <div id='container'></div>
   </body>
 </html>
