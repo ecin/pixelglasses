@@ -19,31 +19,55 @@ var Graph = function(klasses){
 
 var Node = {}
 
-var Node = function(opts){
+var Node = function(opts, parent){
   if(defined(opts)){
     this.value    = opts.value;
     this.children = opts.children;
   }
+  this.parent = parent;
 }
 
 Node.prototype.draw = function(level){
   level = level || 0;
   var peg = new Peg(this.value['class'], this.value['modules']);
   peg.moveTo(Graph2.NEXT, level);
-  var children = this.children
-  children.each( function(node_options, i){
-    var node = new Node(node_options);
+  var self = this;
+  this.nodize(); // Turn all children into Nodes if they're not already.
+  this.children.each( function(node, i){
     if(i>0){
       Graph2.NEXT += 2;
     }
-    node.draw(level+2);
+      node.draw(level+2);
   })
+}
+
+Node.prototype.ancestors = function(){
+  var ancestors = [];
+  var current_node = this;
+  
+  while(defined(current_node.parent)){
+    ancestors.push(current_node.parent);
+    current_node = current_node.parent;
+  }
+  
+  return ancestors;
+}
+
+Node.prototype.nodize = function(){
+  var children = [];
+  var parent = this;
+  
+  this.children.each( function(child){
+    if( typeof(child) != Node ){ children.push( new Node(child, parent) ); }
+    else{ children.push(child); }
+  });
+  
+  this.children = children;
 }
 
 var Graph2 = function(root){
   var position = {'x': 0, 'y': 0}
   
-  this.pegs = new Array;
   this.root = new Node(root);
   this.root.draw();
 }
@@ -56,7 +80,7 @@ var Peg = function(name, discs){
   this.discs = new Array;
   this.position = {'x': 0, 'y': 0};
   
-  this.el = new Element('div', {'class': 'peg', 'peg_name': name});
+  this.el = new Element('div', {'class': 'node', 'value': name});
   this.el.insertTo($('container'));
   this.moveTo(0,0);
   
@@ -72,8 +96,6 @@ var Peg = function(name, discs){
 
 var Cell = function(klass){
   this.el = new Element('div', {'class': klass});
-  this.el.insertTo($('container')); 
-  this.moveTo(1,1);
 }
 
 Cell.prototype.toElement = function(){
@@ -113,8 +135,7 @@ Peg.prototype.moveTo = function(x, y){
   this.toElement().moveTo(left, top);
   this.toElement().style.zIndex = -x;
   
-  // Make sure the discs and banner are moved alongside the peg.
-  this.repositionDiscs();
+  // Make sure the banner is moved alongside the peg.
   this.repositionBanner();
 }
 
@@ -137,31 +158,16 @@ Peg.prototype.removeDisc = function(module_name){
   this.repositionDiscs();
 }*/
 
-Peg.prototype.repositionDiscs = function(){
-  var x = this.position.x;
-  var y = this.position.y;
-  var left = x*32 + y*32; 
-  var top = x*-16 + y*16 - 12; // Peg images are higher than a cell's 32px (by 12px).
-  
-  // * 7: each disc is 7px high.
-  this.discs.map( function(disc, i){ 
-    disc.style.zIndex = -x;
-    disc.moveTo(left, top + 7 - (7 * (i + 1))) 
-  } );
-}
 
 // Add a disc on top of the peg. module_name determines its color.
 Peg.prototype.addDisc = function(disc_name){
   if(!defined(disc_name)){ return false; }
   var disc_number = Peg.registerModule(disc_name);
-  var x = this.position.x;
-  var y = this.position.y;
-  var left = x*32 + y*32; 
-  var top = x*-16 + y*16 - 7*(this.discs.length + 1); // The -7n represents discs already on the stack.
-  var disc = new Element('div', {'class': 'disc' + disc_number, 'disc_name': disc_name});
+  var top = -7*(this.discs.length); // The -7n represents discs already on the stack.
+  var disc = $E('div', {'class': 'disc' + disc_number, 'value': disc_name});
 
-  disc.insertTo($('container'));
-  disc.moveTo(left, top);
+  disc.style.top = top + 'px';
+  disc.insertTo(this.toElement());
   this.discs.push(disc);
   return true;
 }
@@ -184,4 +190,37 @@ Legend = function(modules){
   });
   
   legend.insertTo($$('body')[0]);
+}
+/*
+ <div id='branch'>
+    <div class='title'>Struct</div>
+    <div class="class_name" style="z-index: 1; position: relative; margin: 0 auto; -webkit-border-radius: 0px;">BasicObject</div>
+    <div class="peg" peg_name="BasicObject" style="position: relative; margin: 0 auto; margin-top: 5px; margin-bottom: 5px; z-index: 0; "></div>
+    <div class="class_name" style="z-index: 1; position: relative; margin: 0 auto; -webkit-border-radius: 0px;">Object</div>
+    <div class="peg" peg_name="BasicObject" style="position: relative; margin: 0 auto; margin-top: 5px; margin-bottom: 5px; z-index: 0; ">
+      <div class="disc1" disc_name="Kernel" style="z-index: 0; margin: 0 auto; top: 0px; "></div>
+    </div>
+  </div>
+*/
+
+// class should have a @ancestors property and a @value property
+Inspector = function(node){
+  var branch = new Element('div', {'class': 'branch'});
+  var title = new Element('div', {'class': 'title', 'html': node.value })
+  
+  branch.insert(title);
+  
+  node.ancestors.each( function(ancestor){
+    var class_name = new Element('div', {'class': 'class_name', 'html': ancestor.value });
+    var peg = new Element('div', {'class': 'node', 'value': ancestor.value });
+
+    branch.insert[class_name, peg];
+  })
+  
+  $('container').insert(branch);
+}
+
+Array.prototype.find = function(value){
+  var index = this.indexOf(value);
+  return index != -1 ? this[index] : null;
 }
