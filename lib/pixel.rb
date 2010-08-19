@@ -5,13 +5,13 @@ require 'sinatra'
 set :public, File.expand_path( File.dirname(__FILE__) + '/../public' )
 enable :inline_templates
 
-get '/tree', :provides => :json do 
+get '/', :provides => :json do 
   json = `bin/tree`
   throw :halt, [404, nil] if json.empty?
   json
 end
 
-get '/tree' do
+get '/' do
   erb :grid
 end
 
@@ -46,6 +46,7 @@ __END__
     <link rel='stylesheet' href='/css/pixel.css' />
     <script src='/js/right.js'></script>
     <script src='/js/right.autocompleter.js'></script>
+    <script src='/js/right.lightbox.js'></script>
     <script src='/js/pixel.js'></script>
     <script>
     
@@ -115,6 +116,7 @@ __END__
             centerScrollOn(node.toElement());
           }
         });
+        Lightbox.show($('welcome').innerHTML);
       };
     
       document.onReady( function(){
@@ -130,6 +132,17 @@ __END__
   </head>
   <body>
     <input id="search" type="search" placeholder="Ruby class name">
+    <div id="welcome">
+      <img src="/img/pixelglasses.png" style="margin: 0 auto; opacity: 0.75;">
+      For the great memories <b>_why</b> created in the <span style="color: red;">Ruby</span> community.
+      <ul>
+        <li>See all your favorite Ruby classes in a more colorful format.</li>
+        <li>Double-click a peg to see a class's heirarchy.</li>
+        <li>Search for a Ruby class in the upper right corner.</li>
+        <li>Fork on <a href="http://github.com/ecin/pixelglasses">Github</a> and improve.</li>
+        <li>Tested in Safari and Firefox, but still error prone. Refresh if anything goes wrong.</li>
+      </ul>
+    </div>
     <div id='inspector'></div>
     <div id='container'></div>
   </body>

@@ -6,7 +6,15 @@
 *{ padding: 0; margin: 0; }
 html{ height: 100%; width: 100%; }
 body{ height: 100%; width: 100%; overflow: hidden; background-image: url(/img/background_grid.png); position: absolute; top: 0; left: 0; }
-#container{ overflow: visible; z-index: 0; height: 100%; width: 100%; position: absolute;}
+#welcome{ display: none; }
+.lightbox{ font-family: arial, helvetica, sans-serif; }
+.lightbox-dialog{ }
+.lightbox-caption{ display: none; height: 0; }
+.lightbox-body{ min-width: 400px !important; min-height: 220px !important; background: url(/img/logo.png) no-repeat bottom right; }
+.lightbox-body > ul{
+  list-style: circle;
+}
+#container{ overflow: visible; z-index: 0; height: 100%; width: 100%; position: relative;}
 .dragging{ z-index: 0;}
 .node{ min-height: 44px; width: 64px; background: url(/img/peg.png); position: absolute; cursor: pointer; }
 .node:active{ cursor: move; }
