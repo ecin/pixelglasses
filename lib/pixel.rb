@@ -110,7 +110,6 @@ __END__
           onDone: function(){
             var name = $('search').value;
             var node = TREE.find(function(node){ return  node.value['class'] == name });
-            console.log(node);
             $$('#container div.node').each( function(el){ el.style.opacity = 0.3; });
             node.toElement().style.opacity = 1;
             centerScrollOn(node.toElement());

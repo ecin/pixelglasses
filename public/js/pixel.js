@@ -210,7 +210,6 @@ Legend = function(modules){
   title.insertTo(legend);
   
   Object.keys(modules).each( function(key){
-    console.log(key);
     var item = new Element('div', {'class': 'key'});
     var label = new Element('div', {'class': 'label', 'html': key});
     var disc = new Element('div', {'class': 'legend_disc' + modules[key]});
