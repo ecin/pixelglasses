@@ -31,8 +31,6 @@ get '/:klass' do
   erb :grid
 end
 
-Sinatra::Application.run!
-
 __END__
 
 @@grid
