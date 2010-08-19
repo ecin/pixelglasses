@@ -6,6 +6,8 @@ require 'tree'
 tree = Tree.new({:class => BasicObject, :modules => BasicObject.included_modules.reverse})
 
 ObjectSpace.each_object(Class) do |obj|
+  # Skip all SystemCallError subclasses; there are many, and don't add much info.
+  next if obj.superclass == SystemCallError
   current_node = tree.root
   (obj.ancestors - obj.included_modules).reverse[1..-1].each do |klass|
     if res = current_node.find({:class => klass, :modules => klass.included_modules.reverse})

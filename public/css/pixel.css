@@ -5,14 +5,16 @@
 @font-face { font-family: M04; src: url('/ttf/m04.ttf'); }
 *{ padding: 0; margin: 0; }
 html{ height: 100%; width: 100%; }
-body{ height: 100%; width: 100%; overflow: hidden; background-image: url(/img/background_grid.png); }
-#container{  overflow: none; }
-.node{ min-height: 44px; width: 64px; background: url(/img/peg.png); position: absolute; }
+body{ height: 100%; width: 100%; overflow: hidden; background-image: url(/img/background_grid.png); position: absolute; top: 0; left: 0; }
+#container{ overflow: visible; z-index: 0; height: 100%; width: 100%; position: absolute;}
+.dragging{ z-index: 0;}
+.node{ min-height: 44px; width: 64px; background: url(/img/peg.png); position: absolute; cursor: pointer; }
+.node:active{ cursor: move; }
 .pipe{ height: 32px; width: 64px; background: url(/img/pipe.png); position: absolute; }
 .disc1{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
-.disc2{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
-.disc3{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
-.disc4{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
+.disc2{ height: 36px; width: 64px; background: url(/img/orange_disc.png); position: absolute; }
+.disc3{ height: 36px; width: 64px; background: url(/img/green_disc.png); position: absolute; }
+.disc4{ height: 36px; width: 64px; background: url(/img/blue_disc.png); position: absolute; }
 .disc5{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
 .disc6{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
 .disc7{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
@@ -29,12 +31,22 @@ body{ height: 100%; width: 100%; overflow: hidden; background-image: url(/img/ba
   letter-spacing: 1px;
   }
 .module { font-family: Apple; font-size: 8px; position: absolute; }
-#search_box{
-  position: relative;
+#search{
+  position: fixed;
   top: 20px;
-  float: right;
-  margin-right: 20px;
-  z-index: 1000;
+  right: 20px;
+  z-index: 1;
+  width: 200px;
+}
+.autocompleter{
+  font-family: Arial, Helvetica, sans-serif;
+}
+div.autocompleter ul li.current{
+  background: #eee !important;
+  color: #111;
+  padding-left: 29px;
+  background: url(/img/pixelglasses.png) no-repeat left center !important;
+  background-color: #eee !important;
 }
 #legend{
   font-family: Fipps;
@@ -47,6 +59,7 @@ body{ height: 100%; width: 100%; overflow: hidden; background-image: url(/img/ba
   left: 20px;
   bottom: 20px;
   background: white;
+  z-index: 1;
 }
 #legend .key{
   min-width: 64px; 
@@ -59,7 +72,7 @@ body{ height: 100%; width: 100%; overflow: hidden; background-image: url(/img/ba
 }
 #legend .title{
   text-align: center;
-  background: #ccc;
+  background: #eee;
   -webkit-border-radius: 5px 5px 0px 0px;
 }
 #legend .label{
@@ -70,9 +83,9 @@ body{ height: 100%; width: 100%; overflow: hidden; background-image: url(/img/ba
   width: 64px;
 }
 .legend_disc1{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
-.legend_disc2{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
-.legend_disc3{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
-.legend_disc4{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
+.legend_disc2{ height: 36px; width: 64px; background: url(/img/orange_disc.png); margin: 0 auto; }
+.legend_disc3{ height: 36px; width: 64px; background: url(/img/green_disc.png); margin: 0 auto; }
+.legend_disc4{ height: 36px; width: 64px; background: url(/img/blue_disc.png); margin: 0 auto; }
 .legend_disc5{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
 .legend_disc6{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
 .legend_disc7{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
@@ -84,10 +97,11 @@ body{ height: 100%; width: 100%; overflow: hidden; background-image: url(/img/ba
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   opacity: 0.90;
-  margin-top: 20px;
-  margin-left: 20px;
+  top: 20px;
+  left: 20px;
   font-family: Fipps;
   font-size: 8px;
+  z-index: 1;
 }
 #inspector .title{
   background: #fff;

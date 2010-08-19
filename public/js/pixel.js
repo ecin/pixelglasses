@@ -91,6 +91,12 @@ Graph2.prototype.find = function(lambda){
   return this.root.find(lambda);
 }
 
+// Graph2#find can also be used to iterate over node's value
+// Should probably be the other way around, huh...
+Graph2.prototype.each = function(lambda){
+  this.root.find(lambda);
+}
+
 Graph2.NEXT = 0;
 
 // @discs: an array of strings, representing the name of each disc.
@@ -146,11 +152,16 @@ Peg.prototype.toElement = function(){
   return this.el;
 }
 
+Graph2.TOP = 0;
+Graph2.BOTTOM = 0;
+
 // Move the peg to the given coordinates on the isometric map
 Peg.prototype.moveTo = function(x, y){
   this.position = {'x': x, 'y': y};
   var left = x*32 + y*32; 
   var top = x*-16 + y*16 - 12; // Peg images are higher than a cell's 32px (by 12px).
+  if(Graph2.BOTTOM > top) Graph2.BOTTOM = top;
+  if(Graph2.TOP < top) Graph2.TOP = top;
   this.toElement().moveTo(left, top);
   this.toElement().style.zIndex = -x;
   
@@ -182,7 +193,7 @@ Peg.prototype.removeDisc = function(module_name){
 Peg.prototype.addDisc = function(disc_name){
   if(!defined(disc_name)){ return false; }
   var disc_number = Peg.registerModule(disc_name);
-  var top = -7*(this.discs.length); // The -7n represents discs already on the stack.
+  var top = -6*(this.discs.length); // The -6n represents discs already on the stack.
   var disc = $E('div', {'class': 'disc' + disc_number, 'value': disc_name});
 
   disc.style.top = top + 'px';
@@ -211,8 +222,11 @@ Legend = function(modules){
   legend.insertTo($$('body')[0]);
 }
 
+// Displays inspector for a given class/peg
 // node should have a @ancestors property and a @value property
 Graph2.prototype.display = function(klass){
+  $$('#container div.node').each( function(el){ el.style.opacity = 1; });
+  
   var lambda = function(node){
     return node.value['class'] == klass;
   }
