@@ -132,7 +132,7 @@ __END__
             centerScrollOn(node.toElement());
           }
         });
-        //Lightbox.show($('welcome').innerHTML);
+        Lightbox.show($('welcome').innerHTML);
       };
     
       document.onReady( function(){
