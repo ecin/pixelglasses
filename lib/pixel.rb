@@ -49,20 +49,41 @@ __END__
     <script>
     
       var centerOn = function(element){
+        // reset container
+        var container = $('container');
+        container.style.top = 0;
+        container.style.left = 0;
+        
+        // Get position of element we're positioning
         var pos = element.position();
         var height = element.scrollHeight;
         var width = element.scrollWidth;
-        $(window).scrollTo(pos.x - (window.screen.availWidth/2) + (width/2), pos.y - (window.screen.availHeight/2) + (height/2));
+        container.style.left = -pos.x + window.screen.availWidth/2.3 + 'px';
+        container.style.top = -pos.y + window.screen.availHeight/2.3 + 'px';
       };
       
       var centerScrollOn = function(element){
-        var fx = new Fx.Scroll(window);
+        // Ugly follows
+        // reset container pos
+        var container = $('container');
+        var original_top = container.style.top;
+        var original_left = container.style.left;
+        container.style.top = 0;
+        container.style.left = 0;
+
+        // Get position of element now.
         var pos = element.position();
         var height = element.scrollHeight;
         var width = element.scrollWidth;
-        fx.start({
-          'x': pos.x - (window.screen.availWidth/2) + (width/2), 
-          'y': pos.y - (window.screen.availHeight/2) + (height/2)
+ 
+        // Go back to original position
+        container.style.top = original_top;
+        container.style.left = original_left;
+
+        // NOW scroll
+        new Fx.Morph('container', {'duration': 'short', 'transition': 'Log'}).start({
+          'left': -pos.x + window.screen.availWidth/2.3 + 'px', 
+          'top': -pos.y + window.screen.availHeight/2.3 + 'px'
         });
       }
     
@@ -97,9 +118,6 @@ __END__
         "html".on('dblclick', function(el){
           $('inspector').clean();
         });
-        $('container').style.top = Math.abs($$('.node').last().position().y) + window.screen.height + 'px';
-        $('container').style.left = Math.abs($$('.node').first().position().x) + window.screen.width + 'px';
-        $('container').style.width = $('container').scrollWidth + window.screen.width + 'px';
         centerOn($$('.node').first());
         var classes = []
         TREE.each( function(el){ classes.push(el.value['class'])});
@@ -114,7 +132,7 @@ __END__
             centerScrollOn(node.toElement());
           }
         });
-        Lightbox.show($('welcome').innerHTML);
+        //Lightbox.show($('welcome').innerHTML);
       };
     
       document.onReady( function(){
