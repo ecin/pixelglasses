@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+$:.unshift File.expand_path(File.dirname(__FILE__) + '/../lib')
+
+require 'tree'
 
 klass = ARGV[0]
 # Let's be UNIX friendly and exit with a status of 1 if we screw up.
@@ -6,16 +9,23 @@ exit 1 unless Kernel.const_defined?(klass)
 
 klass = Kernel.const_get klass
 
-klasses = []
-(klass.ancestors - klass.included_modules).reverse.each do |k|
-  klasses << {:klass => k.to_s,
-              :modules => k.included_modules.map(&:to_s).sort}
+tree = Tree.new({:class => BasicObject, :modules => BasicObject.included_modules.reverse})
+
+current_node = tree.root
+(klass.ancestors - klass.included_modules).reverse[1..-1].each do |k|
+  if res = current_node.find({:class => k, :modules => k.included_modules.reverse})
+    current_node = res
+  else
+    node = Tree::Node.new({:class => k, :modules => k.included_modules.reverse})
+    current_node << node
+    current_node = node
+  end
 end
 
 # NOW require json, after we got our vanilla modules.
 require 'json'
 
-puts klasses.to_json
+puts tree.to_json
 
 # No errors, let's get out of here!
 exit 0
