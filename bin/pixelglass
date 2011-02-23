@@ -9,7 +9,8 @@ exit 1 unless Kernel.const_defined?(klass)
 
 klass = Kernel.const_get klass
 
-tree = Tree.new({:class => BasicObject, :modules => BasicObject.included_modules.reverse})
+core = (Object.ancestors - Object.included_modules).last
+tree = Tree.new({:class => core, :modules => core.included_modules.reverse})
 
 current_node = tree.root
 (klass.ancestors - klass.included_modules).reverse[1..-1].each do |k|

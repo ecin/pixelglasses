@@ -3,7 +3,8 @@
 $:.unshift File.expand_path(File.dirname(__FILE__) + '/../lib')
 require 'tree'
 
-tree = Tree.new({:class => BasicObject, :modules => BasicObject.included_modules.reverse})
+core = (Object.ancestors - Object.included_modules).last
+tree = Tree.new({:class => core, :modules => core.included_modules.reverse})
 
 ObjectSpace.each_object(Class) do |obj|
   # Skip all SystemCallError subclasses; there are many, and don't add much info.
