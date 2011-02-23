@@ -1,6 +1,13 @@
-class Tree < Struct.new(:root)
+class Tree 
+  attr_accessor :root
+  
+  def initialize(root)
+    self.root = root
+  end
 
-  class Node < Struct.new(:children, :parent, :value)
+  class Node
+    attr_accessor :children, :parent, :value
+    
     def initialize(value, parent = nil)
       self.value = value
       self.parent = parent
