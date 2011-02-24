@@ -27,6 +27,14 @@ body{ height: 100%; width: 100%; overflow: hidden; background-image: url(/img/ba
 .disc6{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
 .disc7{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
 .disc8{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
+.disc9{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
+.disc10{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
+.disc11{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
+.disc12{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
+.disc13{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
+.disc14{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
+.disc15{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
+.disc16{ height: 36px; width: 64px; background: url(/img/pink_disc.png); position: absolute; }
 .class_name{ 
   font-family: Fipps; 
   position: absolute; 
@@ -68,6 +76,7 @@ div.autocompleter ul li.current{
   bottom: 20px;
   background: white;
   z-index: 1;
+  max-width: 97%;
 }
 #legend .key{
   min-width: 64px; 
@@ -98,6 +107,18 @@ div.autocompleter ul li.current{
 .legend_disc6{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
 .legend_disc7{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
 .legend_disc8{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
+.legend_disc9{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
+.legend_disc10{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
+.legend_disc11{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
+.legend_disc12{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
+.legend_disc13{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
+.legend_disc14{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
+.legend_disc15{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
+.legend_disc16{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
+.legend_disc17{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
+.legend_disc18{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
+.legend_disc19{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
+.legend_disc20{ height: 36px; width: 64px; background: url(/img/pink_disc.png); margin: 0 auto; }
 #inspector{
   min-width: 125px;
   position: fixed;

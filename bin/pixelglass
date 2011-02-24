@@ -1,29 +1,89 @@
 #!/usr/bin/env ruby
-$:.unshift File.expand_path(File.dirname(__FILE__) + '/../lib')
 
+# Generate a tree for a Ruby class heirarchy.
+# Can be done for an entire Ruby environment, a gem library,
+# or a single class.
+
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../lib')
+
+require 'optparse'
 require 'tree'
 
-klass = ARGV[0]
-# Let's be UNIX friendly and exit with a status of 1 if we screw up.
-exit 1 unless Kernel.const_defined?(klass)
+class Class; def branch; self.included_modules.reverse.map(&:to_s); end; end
 
-klass = Kernel.const_get klass
+options = {}
 
-core = (Object.ancestors - Object.included_modules).last
-tree = Tree.new({:class => core, :modules => core.included_modules.reverse})
+OptionParser.new do |opts|
+  opts.banner = 'Usage: pixelglass [options] [class]'
+  
+  opts.on('-g', '--gem', 'generate tree for a gem') do |switch|
+    options[:gem] = switch
+  end
+  
+  opts.on_tail('-h', '--help', 'show this message') do
+    puts opts
+    exit
+  end
+end.parse!
 
-current_node = tree.root
-(klass.ancestors - klass.included_modules).reverse[1..-1].each do |k|
-  if res = current_node.find({:class => k, :modules => k.included_modules.reverse})
-    current_node = res
+if ARGV[0]
+  if options[:gem]
+    # We're being asked to generate a tree for a gem.
+    # We'll want a 'vanilla' tree to know which classes the gem
+    # adds / modifies
+    require ARGV[0]
+    require 'yaml'
+    vanilla_tree = YAML.load_file File.expand_path('vanilla.yml', File.dirname(__FILE__))
   else
-    node = Tree::Node.new({:class => k, :modules => k.included_modules.reverse})
-    current_node << node
-    current_node = node
+    # We're being asked to generate a tree for a class.
+    klass = ARGV[0].capitalize
+    klass = Kernel.const_defined?(klass) && Kernel.const_get(klass)
+
+    # Let's be UNIX friendly and exit with a status of 1 if we screw up.
+    exit 1 unless klass
+    
+    klasses = (klass.ancestors - klass.included_modules).reverse[1..-1]
   end
 end
 
-# NOW require json, after we got our vanilla modules.
+# The tree's root could either be BasicObject, Object, etc. depending on Ruby 
+# version and platform.
+root = (Object.ancestors - Object.included_modules).last
+
+# If klasses hasn't been defined yet, we want to consider all the classes loaded 
+# in this environment.
+klasses ||= ObjectSpace.each_object Class
+
+tree = Tree.new({ :class => root.to_s, :modules => root.branch })
+
+current_node = tree.root
+klasses.each do |klass|
+  # Skip all SystemCallError subclasses; there are many, and don't add much info.
+  next if klass.superclass == SystemCallError
+  # Skip the Tree and Tree::Node classes we've introduced
+  next if klass.to_s =~ /Tree(::)*/
+  # If we're graphing a gem, we only want to include classes that have been modified
+  # by said gem
+  if options[:gem]
+    next if klass.to_s =~ /^Gem::.*/
+    next if vanilla_tree.find {|node| node.value[:class].to_s == klass.to_s } #, :modules => klass.branch } }
+  end
+  current_node = tree.root
+  (klass.ancestors - klass.included_modules).reverse[1..-1].each do |ancestor|
+    # If the ancestor is already in our tree, any further ancestors will be added starting from
+    # this node.
+    if found_node = current_node.find {|node| node.value == { :class => ancestor.to_s, :modules => ancestor.branch } }
+      current_node = found_node
+    else
+      # Otherwise, create a new node and insert it as a child of the current_node.
+      child = Tree::Node.new({ :class => ancestor.to_s, :modules => ancestor.branch })
+      current_node << child
+      current_node = child
+    end
+  end
+end
+
+# NOW require json, after we got our vanilla classes.
 require 'json'
 
 puts tree.to_json

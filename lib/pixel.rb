@@ -1,12 +1,22 @@
-$:.unshift File.expand_path(File.dirname(__FILE__))
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__))
 
 require 'sinatra'
 
 set :public, File.expand_path( File.dirname(__FILE__) + '/../public' )
 enable :inline_templates
 
+get '/gems/:gem', :provides => :json do |lib|
+  json = `bin/pixelglass -g #{lib}`
+  throw :halt, [404, nil] if json.empty?
+  json
+end
+
+get '/gems/:gem' do
+  erb :grid
+end
+
 get '/', :provides => :json do 
-  json = `bin/tree`
+  json = `bin/pixelglass`
   throw :halt, [404, nil] if json.empty?
   json
 end
@@ -132,7 +142,7 @@ __END__
             centerScrollOn(node.toElement());
           }
         });
-        Lightbox.show($('welcome').innerHTML);
+        //Lightbox.show($('welcome').innerHTML);
       };
     
       document.onReady( function(){
