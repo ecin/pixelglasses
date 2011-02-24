@@ -1,0 +1,823 @@
+--- !ruby/object:Tree 
+root: &id022 !ruby/object:Tree::Node 
+  children: 
+  - &id015 !ruby/object:Tree::Node 
+    children: 
+    - &id001 !ruby/object:Tree::Node 
+      children: 
+      - !ruby/object:Tree::Node 
+        children: []
+
+        parent: *id001
+        value: 
+          :class: Complex
+          :modules: 
+          - Kernel
+          - Comparable
+      - !ruby/object:Tree::Node 
+        children: []
+
+        parent: *id001
+        value: 
+          :class: Rational
+          :modules: 
+          - Kernel
+          - Comparable
+      - &id002 !ruby/object:Tree::Node 
+        children: 
+        - !ruby/object:Tree::Node 
+          children: []
+
+          parent: *id002
+          value: 
+            :class: Bignum
+            :modules: 
+            - Kernel
+            - Comparable
+        - !ruby/object:Tree::Node 
+          children: []
+
+          parent: *id002
+          value: 
+            :class: Fixnum
+            :modules: 
+            - Kernel
+            - Comparable
+        parent: *id001
+        value: 
+          :class: Integer
+          :modules: 
+          - Kernel
+          - Comparable
+      - !ruby/object:Tree::Node 
+        children: []
+
+        parent: *id001
+        value: 
+          :class: Float
+          :modules: 
+          - Kernel
+          - Comparable
+      parent: *id015
+      value: 
+        :class: Numeric
+        :modules: 
+        - Kernel
+        - Comparable
+    - &id012 !ruby/object:Tree::Node 
+      children: 
+      - &id003 !ruby/object:Tree::Node 
+        children: 
+        - !ruby/object:Tree::Node 
+          children: []
+
+          parent: *id003
+          value: 
+            :class: FiberError
+            :modules: 
+            - Kernel
+        - !ruby/object:Tree::Node 
+          children: []
+
+          parent: *id003
+          value: 
+            :class: ThreadError
+            :modules: 
+            - Kernel
+        - &id004 !ruby/object:Tree::Node 
+          children: 
+          - !ruby/object:Tree::Node 
+            children: []
+
+            parent: *id004
+            value: 
+              :class: StopIteration
+              :modules: 
+              - Kernel
+          - !ruby/object:Tree::Node 
+            children: []
+
+            parent: *id004
+            value: 
+              :class: KeyError
+              :modules: 
+              - Kernel
+          parent: *id003
+          value: 
+            :class: IndexError
+            :modules: 
+            - Kernel
+        - !ruby/object:Tree::Node 
+          children: []
+
+          parent: *id003
+          value: 
+            :class: Math::DomainError
+            :modules: 
+            - Kernel
+        - !ruby/object:Tree::Node 
+          children: []
+
+          parent: *id003
+          value: 
+            :class: LocalJumpError
+            :modules: 
+            - Kernel
+        - &id005 !ruby/object:Tree::Node 
+          children: 
+          - !ruby/object:Tree::Node 
+            children: []
+
+            parent: *id005
+            value: 
+              :class: EOFError
+              :modules: 
+              - Kernel
+          parent: *id003
+          value: 
+            :class: IOError
+            :modules: 
+            - Kernel
+        - &id006 !ruby/object:Tree::Node 
+          children: 
+          - !ruby/object:Tree::Node 
+            children: []
+
+            parent: *id006
+            value: 
+              :class: Encoding::ConverterNotFoundError
+              :modules: 
+              - Kernel
+          - !ruby/object:Tree::Node 
+            children: []
+
+            parent: *id006
+            value: 
+              :class: Encoding::InvalidByteSequenceError
+              :modules: 
+              - Kernel
+          - !ruby/object:Tree::Node 
+            children: []
+
+            parent: *id006
+            value: 
+              :class: Encoding::UndefinedConversionError
+              :modules: 
+              - Kernel
+          - !ruby/object:Tree::Node 
+            children: []
+
+            parent: *id006
+            value: 
+              :class: Encoding::CompatibilityError
+              :modules: 
+              - Kernel
+          parent: *id003
+          value: 
+            :class: EncodingError
+            :modules: 
+            - Kernel
+        - !ruby/object:Tree::Node 
+          children: []
+
+          parent: *id003
+          value: 
+            :class: RegexpError
+            :modules: 
+            - Kernel
+        - &id007 !ruby/object:Tree::Node 
+          children: 
+          - !ruby/object:Tree::Node 
+            children: []
+
+            parent: *id007
+            value: 
+              :class: FloatDomainError
+              :modules: 
+              - Kernel
+          parent: *id003
+          value: 
+            :class: RangeError
+            :modules: 
+            - Kernel
+        - !ruby/object:Tree::Node 
+          children: []
+
+          parent: *id003
+          value: 
+            :class: ZeroDivisionError
+            :modules: 
+            - Kernel
+        - !ruby/object:Tree::Node 
+          children: []
+
+          parent: *id003
+          value: 
+            :class: SystemCallError
+            :modules: 
+            - Kernel
+        - &id010 !ruby/object:Tree::Node 
+          children: 
+          - &id009 !ruby/object:Tree::Node 
+            children: 
+            - &id008 !ruby/object:Tree::Node 
+              children: 
+              - !ruby/object:Tree::Node 
+                children: []
+
+                parent: *id008
+                value: 
+                  :class: OptionParser::AmbiguousArgument
+                  :modules: 
+                  - Kernel
+              parent: *id009
+              value: 
+                :class: OptionParser::InvalidArgument
+                :modules: 
+                - Kernel
+            - !ruby/object:Tree::Node 
+              children: []
+
+              parent: *id009
+              value: 
+                :class: OptionParser::InvalidOption
+                :modules: 
+                - Kernel
+            - !ruby/object:Tree::Node 
+              children: []
+
+              parent: *id009
+              value: 
+                :class: OptionParser::MissingArgument
+                :modules: 
+                - Kernel
+            - !ruby/object:Tree::Node 
+              children: []
+
+              parent: *id009
+              value: 
+                :class: OptionParser::NeedlessArgument
+                :modules: 
+                - Kernel
+            - !ruby/object:Tree::Node 
+              children: []
+
+              parent: *id009
+              value: 
+                :class: OptionParser::AmbiguousOption
+                :modules: 
+                - Kernel
+            parent: *id010
+            value: 
+              :class: OptionParser::ParseError
+              :modules: 
+              - Kernel
+          parent: *id003
+          value: 
+            :class: RuntimeError
+            :modules: 
+            - Kernel
+        - &id011 !ruby/object:Tree::Node 
+          children: 
+          - !ruby/object:Tree::Node 
+            children: []
+
+            parent: *id011
+            value: 
+              :class: NoMethodError
+              :modules: 
+              - Kernel
+          parent: *id003
+          value: 
+            :class: NameError
+            :modules: 
+            - Kernel
+        - !ruby/object:Tree::Node 
+          children: []
+
+          parent: *id003
+          value: 
+            :class: ArgumentError
+            :modules: 
+            - Kernel
+        - !ruby/object:Tree::Node 
+          children: []
+
+          parent: *id003
+          value: 
+            :class: TypeError
+            :modules: 
+            - Kernel
+        parent: *id012
+        value: 
+          :class: StandardError
+          :modules: 
+          - Kernel
+      - !ruby/object:Tree::Node 
+        children: []
+
+        parent: *id012
+        value: 
+          :class: SystemStackError
+          :modules: 
+          - Kernel
+      - !ruby/object:Tree::Node 
+        children: []
+
+        parent: *id012
+        value: 
+          :class: NoMemoryError
+          :modules: 
+          - Kernel
+      - !ruby/object:Tree::Node 
+        children: []
+
+        parent: *id012
+        value: 
+          :class: SecurityError
+          :modules: 
+          - Kernel
+      - &id013 !ruby/object:Tree::Node 
+        children: 
+        - !ruby/object:Tree::Node 
+          children: []
+
+          parent: *id013
+          value: 
+            :class: NotImplementedError
+            :modules: 
+            - Kernel
+        - !ruby/object:Tree::Node 
+          children: []
+
+          parent: *id013
+          value: 
+            :class: LoadError
+            :modules: 
+            - Kernel
+        - !ruby/object:Tree::Node 
+          children: []
+
+          parent: *id013
+          value: 
+            :class: SyntaxError
+            :modules: 
+            - Kernel
+        parent: *id012
+        value: 
+          :class: ScriptError
+          :modules: 
+          - Kernel
+      - &id014 !ruby/object:Tree::Node 
+        children: 
+        - !ruby/object:Tree::Node 
+          children: []
+
+          parent: *id014
+          value: 
+            :class: Interrupt
+            :modules: 
+            - Kernel
+        parent: *id012
+        value: 
+          :class: SignalException
+          :modules: 
+          - Kernel
+      - !ruby/object:Tree::Node 
+        children: []
+
+        parent: *id012
+        value: 
+          :class: fatal
+          :modules: 
+          - Kernel
+      - !ruby/object:Tree::Node 
+        children: []
+
+        parent: *id012
+        value: 
+          :class: SystemExit
+          :modules: 
+          - Kernel
+      parent: *id015
+      value: 
+        :class: Exception
+        :modules: 
+        - Kernel
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: Fiber
+        :modules: 
+        - Kernel
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: Mutex
+        :modules: 
+        - Kernel
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: ThreadGroup
+        :modules: 
+        - Kernel
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: RubyVM::InstructionSequence
+        :modules: 
+        - Kernel
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: Thread
+        :modules: 
+        - Kernel
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: RubyVM::Env
+        :modules: 
+        - Kernel
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: RubyVM
+        :modules: 
+        - Kernel
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: Enumerator::Yielder
+        :modules: 
+        - Kernel
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: Enumerator::Generator
+        :modules: 
+        - Kernel
+        - Enumerable
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: Enumerator
+        :modules: 
+        - Kernel
+        - Enumerable
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: Binding
+        :modules: 
+        - Kernel
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: UnboundMethod
+        :modules: 
+        - Kernel
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: Method
+        :modules: 
+        - Kernel
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: Proc
+        :modules: 
+        - Kernel
+    - &id016 !ruby/object:Tree::Node 
+      children: 
+      - !ruby/object:Tree::Node 
+        children: []
+
+        parent: *id016
+        value: 
+          :class: Struct::Tms
+          :modules: 
+          - Kernel
+          - Enumerable
+      parent: *id015
+      value: 
+        :class: Struct
+        :modules: 
+        - Kernel
+        - Enumerable
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: Process::Status
+        :modules: 
+        - Kernel
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: Random
+        :modules: 
+        - Kernel
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: Time
+        :modules: 
+        - Kernel
+        - Comparable
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: Dir
+        :modules: 
+        - Kernel
+        - Enumerable
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: File::Stat
+        :modules: 
+        - Kernel
+        - Comparable
+    - &id017 !ruby/object:Tree::Node 
+      children: 
+      - !ruby/object:Tree::Node 
+        children: []
+
+        parent: *id017
+        value: 
+          :class: File
+          :modules: 
+          - Kernel
+          - Enumerable
+          - File::Constants
+      parent: *id015
+      value: 
+        :class: IO
+        :modules: 
+        - Kernel
+        - Enumerable
+        - File::Constants
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: ARGF.class
+        :modules: 
+        - Kernel
+        - Enumerable
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: Range
+        :modules: 
+        - Kernel
+        - Enumerable
+    - &id018 !ruby/object:Tree::Node 
+      children: 
+      - !ruby/object:Tree::Node 
+        children: []
+
+        parent: *id018
+        value: 
+          :class: Encoding::Converter
+          :modules: 
+          - Kernel
+      - !ruby/object:Tree::Node 
+        children: []
+
+        parent: *id018
+        value: 
+          :class: NameError::message
+          :modules: 
+          - Kernel
+      parent: *id015
+      value: 
+        :class: Data
+        :modules: 
+        - Kernel
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: MatchData
+        :modules: 
+        - Kernel
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: Regexp
+        :modules: 
+        - Kernel
+    - &id019 !ruby/object:Tree::Node 
+      children: 
+      - !ruby/object:Tree::Node 
+        children: []
+
+        parent: *id019
+        value: 
+          :class: OptionParser::CompletingHash
+          :modules: 
+          - Kernel
+          - Enumerable
+          - OptionParser::Completion
+      - !ruby/object:Tree::Node 
+        children: []
+
+        parent: *id019
+        value: 
+          :class: OptionParser::OptionMap
+          :modules: 
+          - Kernel
+          - Enumerable
+          - OptionParser::Completion
+      parent: *id015
+      value: 
+        :class: Hash
+        :modules: 
+        - Kernel
+        - Enumerable
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: Array
+        :modules: 
+        - Kernel
+        - Enumerable
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: Symbol
+        :modules: 
+        - Kernel
+        - Comparable
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: String
+        :modules: 
+        - Kernel
+        - Comparable
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: Encoding
+        :modules: 
+        - Kernel
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: FalseClass
+        :modules: 
+        - Kernel
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: TrueClass
+        :modules: 
+        - Kernel
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: NilClass
+        :modules: 
+        - Kernel
+    - &id020 !ruby/object:Tree::Node 
+      children: 
+      - !ruby/object:Tree::Node 
+        children: []
+
+        parent: *id020
+        value: 
+          :class: Class
+          :modules: 
+          - Kernel
+      parent: *id015
+      value: 
+        :class: Module
+        :modules: 
+        - Kernel
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: OptionParser::List
+        :modules: 
+        - Kernel
+    - &id021 !ruby/object:Tree::Node 
+      children: 
+      - !ruby/object:Tree::Node 
+        children: []
+
+        parent: *id021
+        value: 
+          :class: OptionParser::Switch::PlacedArgument
+          :modules: 
+          - Kernel
+      - !ruby/object:Tree::Node 
+        children: []
+
+        parent: *id021
+        value: 
+          :class: OptionParser::Switch::OptionalArgument
+          :modules: 
+          - Kernel
+      - !ruby/object:Tree::Node 
+        children: []
+
+        parent: *id021
+        value: 
+          :class: OptionParser::Switch::RequiredArgument
+          :modules: 
+          - Kernel
+      - !ruby/object:Tree::Node 
+        children: []
+
+        parent: *id021
+        value: 
+          :class: OptionParser::Switch::NoArgument
+          :modules: 
+          - Kernel
+      parent: *id015
+      value: 
+        :class: OptionParser::Switch
+        :modules: 
+        - Kernel
+    - !ruby/object:Tree::Node 
+      children: []
+
+      parent: *id015
+      value: 
+        :class: OptionParser
+        :modules: 
+        - Kernel
+    parent: *id022
+    value: 
+      :class: Object
+      :modules: 
+      - Kernel
+  parent: 
+  value: 
+    :class: BasicObject
+    :modules: []
+

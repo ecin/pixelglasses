@@ -31,8 +31,23 @@ if ARGV[0]
     # We're being asked to generate a tree for a gem.
     # We'll want a 'vanilla' tree to know which classes the gem
     # adds / modifies
-    require ARGV[0]
+    require ARGV[0].downcase
     require 'yaml'
+    require 'documentable'
+    Documentable.load ARGV[0].downcase
+    # We're gonna graph the classes that YARD finds for us.
+    klasses = Documentable.map do |object|
+      name = object.to_s
+      begin
+        require name.gsub('::', '/').downcase
+      rescue LoadError
+      end
+      begin
+        name.split('::').inject(Kernel) {|namespace, subclass| namespace.const_get(subclass) }
+      rescue
+        next
+      end
+    end.compact
     vanilla_tree = YAML.load_file File.expand_path('vanilla.yml', File.dirname(__FILE__))
   else
     # We're being asked to generate a tree for a class.
