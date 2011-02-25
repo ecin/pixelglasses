@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>pixelglass.es</title>
+    <meta name='description' content='A punch of isometric fun for your Ruby documentation.' />
+    <meta name='keywords' content='ruby, documentation, isometric, graph, copypastel, pixel, ecin' />
+    <meta http-equiv='Content-Type' content='text/html' charset='utf-8' />
+    <link rel='stylesheet' href='/css/pixel.css' />
+    <script src='/js/right.js'></script>
+    <script src='/js/pixel.js'></script>
+    <script>
+      document.onReady( function(){
+				var body = $$('body').first();
+        var request = new Xhr(document.URL, 
+                              { 'method': 'get',
+                                'onSuccess': function(response){
+                                var json = response.responseJSON;
+                                TREE = new Graph2(json);
+                                new Draggable($('container'), {
+                                  scroll: false,
+																	zIndex: 0,
+                                  onDrag: function(draggable, event){
+                                    var x = event.clientX;
+                                    var y = event.clientY;
+                                    body.style.backgroundPosition = x + 'px ' + y + 'px';
+                                  },
+																	onStop: function(draggable, event){
+																		console.log(draggable);
+																		draggable.style.zIndex = 0;
+																	}
+                                });
+                                new Legend(Peg.modules);
+                                "#container div.node".on('dblclick', function(el){
+                                  TREE.display(el.target.value);
+                                })
+                                "#container div.node > div".on('dblclick', function(el){
+                                  TREE.display(el.target.parentNode.value);                                  
+                                });
+                                "body".on('dblclick', function(el){
+                                  $('inspector').clean();
+                                })
+                              }});
+        request.setHeader('Accept', 'application/json');
+        request.send();
+      });
+    </script>
+  </head>
+  <body>
+    <form>
+      <input id="search_box" type="search" placeholder="Ruby class name">
+    </form>
+    <div id='inspector'></div>
+    <div id='container'></div>
+  </body>
+</html>

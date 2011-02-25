@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+
+# Require gem and generate doc text for a given
+# class.
+
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../lib')
+require 'documentable'
+
+lib, klass = ARGV[0].downcase, ARGV[1]
+
+exit 1 if lib.nil? || klass.nil?
+
+# Attempt to require the gem
+begin
+  require lib
+  require klass.gsub('::', '/').downcase
+rescue LoadError
+end
+
+# Attempt to load the given class. If we fail, can't do anything more.
+begin
+  klass = klass.split('::').inject(Kernel) {|namespace, subclass| namespace.const_get(subclass) }
+rescue
+  # puts "Failed to load class: #{klass}"
+  exit 1
+end
+
+# Extend with Documentable and print the documentation
+klass.extend Documentable
+puts klass.inspect
+puts Documentable.docs_for(lib, klass.name)
+
+# Done!
+exit

@@ -15,6 +15,12 @@ get '/gems/:gem' do
   erb :grid
 end
 
+get '/gems/:gem/:class' do |lib, klass|
+  response = `bin/document #{lib} #{klass}`
+  throw :halt, [404, nil] if response.empty?
+  response
+end
+
 get '/', :provides => :json do 
   json = `bin/pixelglass`
   throw :halt, [404, nil] if json.empty?

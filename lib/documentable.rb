@@ -25,6 +25,17 @@ module Documentable
       !!YARD::Registry.clear
     end
     
+    def docs_for(lib, klass, format = nil)
+      spec = Gem.source_index.find_name(lib).max {|a, b| a.version <=> b.version }
+      return if spec.nil?
+      path = spec.full_gem_path
+      yardoc = File.join path, '.yardoc'
+      lib = File.join path, 'lib/**/*.rb'
+      ext = File.join path, 'etc/**/*.c'
+      YARD::Registry.load!(yardoc)
+      YARD::Registry.at(klass).format(:format => :html, :markup => :rdoc)
+    end
+    
     private
     
     def gem_path(name)
