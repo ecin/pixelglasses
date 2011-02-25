@@ -152,6 +152,8 @@ Peg.prototype.toElement = function(){
   return this.el;
 }
 
+// Show documentation for peg
+
 Graph2.TOP = 0;
 Graph2.BOTTOM = 0;
 
@@ -249,7 +251,17 @@ Graph2.prototype.display = function(klass){
     peg.setStyle({'left': 0, 'top': 0});
 
     inspector.insert([name, peg]);
-  })
+  });
+  
+  var request = new Xhr(document.URL + '/' + node.value['class'], 
+                        { 'method': 'get',
+                          'onSuccess': function(response){
+                            var docs = $('docs');
+                            docs.update(response.responseText);
+                            docs.show();
+                        }
+                        });
+  request.send();
 }
 
 Array.prototype.find = function(lambda){

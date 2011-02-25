@@ -126,13 +126,15 @@ __END__
           TREE.display(el.target.value);
         })
         "#container div.node > div".on('dblclick', function(el){
-          TREE.display(el.target.parentNode.value);                          
+          TREE.display(el.target.parentNode.value);
         });
         "#container".on('dblclick', function(el){
           $('inspector').clean();
+          $('docs').hide();
         });
         "html".on('dblclick', function(el){
           $('inspector').clean();
+          $('docs').hide();
         });
         centerOn($$('.node').first());
         var classes = []
@@ -164,16 +166,7 @@ __END__
   </head>
   <body>
     <input id="search" type="search" placeholder="Ruby class name">
-    <div id="welcome">
-      <img src="/img/pixelglasses.png" style="margin: 0 auto; opacity: 0.75;">
-      For the great memories <b>_why</b> created in the <span style="color: red;">Ruby</span> community.
-      <ul>
-        <li>See all your favorite Ruby classes in a more colorful format.</li>
-        <li>Double-click a peg to see a class's heirarchy.</li>
-        <li>Search for a Ruby class in the upper right corner.</li>
-        <li>Fork on <a href="http://github.com/ecin/pixelglasses">Github</a> and improve.</li>
-        <li>Tested in Safari and Firefox, but still error prone. Refresh if anything goes wrong.</li>
-      </ul>
+    <div id="docs">
     </div>
     <div id='inspector'></div>
     <div id='container'></div>
