@@ -163,4 +163,5 @@ div.autocompleter ul li.current{
   opacity: 0.8;
   -moz-border-radius: 5px 5px 0 0;
   -webkit-border-radius: 5px 5px 0 0;
+  display: none;
 }
